@@ -4,6 +4,9 @@ mail-config.php
 *.env
 .env
 
+# Config local de desenvolvimento (servidor de preview)
+.claude/
+
 # Lixo de sistema operacional
 Thumbs.db
 desktop.ini

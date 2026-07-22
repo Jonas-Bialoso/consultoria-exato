@@ -237,6 +237,10 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);padding:40px 0 28px}
 .behold-wrapper{border-radius:var(--radius);overflow:hidden}
 
 /* ── SORO BLOG — GRID OVERRIDE ── */
+/* O embed injeta .soro-blog{max-width:800px}, o que deixava os artigos
+   mais estreitos que o resto do site. Aqui ele passa a ocupar a mesma
+   largura de conteúdo das outras seções (.container). */
+.soro-blog{max-width:none!important;width:100%!important;margin:0!important}
 .soro-blog-header{display:none!important}
 .soro-blog-list{
   display:grid!important;
@@ -301,6 +305,68 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);padding:40px 0 28px}
   margin-top:auto!important;
   padding-top:12px!important;
   border-top:1px solid var(--border)!important;
+}
+
+/* ── SORO BLOG — PAGINAÇÃO (6 artigos por página) ── */
+.exato-pager{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:40px;
+}
+.exato-pager-btn{
+  min-width:40px;
+  height:40px;
+  padding:0 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--white);
+  color:var(--text);
+  font-family:inherit;
+  font-size:.9rem;
+  font-weight:500;
+  line-height:1;
+  cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.exato-pager-btn:hover:not(:disabled):not(.is-current){
+  background:var(--green-xlight);
+  border-color:var(--green-mid);
+  color:var(--green);
+}
+.exato-pager-btn:focus-visible{
+  outline:2px solid var(--green);
+  outline-offset:2px;
+}
+.exato-pager-btn.is-current{
+  background:var(--green);
+  border-color:var(--green);
+  color:var(--white);
+  cursor:default;
+}
+.exato-pager-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+.exato-pager-gap{
+  padding:0 4px;
+  color:var(--muted);
+  user-select:none;
+}
+.exato-pager-status{
+  width:100%;
+  text-align:center;
+  font-size:.8rem;
+  color:var(--muted);
+  margin-top:4px;
+}
+@media(max-width:600px){
+  .exato-pager-btn{min-width:36px;height:36px;padding:0 9px;font-size:.85rem}
 }
 </style>
 
@@ -519,6 +585,130 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);padding:40px 0 28px}
       var mo=new MutationObserver(function(){scan();});
       mo.observe(target,{childList:true,subtree:true});
       window.addEventListener('load',function(){setTimeout(function(){scan();mo.disconnect();},2000);});
+    })();
+    </script>
+
+    <!-- Paginação dos artigos: 6 por página.
+         O embed do Soro renderiza TODOS os artigos de uma vez dentro de
+         .soro-blog-list. Aqui escondemos tudo menos a fatia da página atual
+         e montamos os controles. Na visualização de post único (?post=slug)
+         a lista não existe — nesse caso a paginação some sozinha. -->
+    <script>
+    (function(){
+      var PER_PAGE = 6;
+      var page = 1;
+      var mo = null;
+      var host = document.getElementById('soro-blog');
+      if(!host) return;
+
+      function mkBtn(label, aria, onClick){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'exato-pager-btn';
+        b.textContent = label;
+        b.setAttribute('aria-label', aria);
+        if(onClick) b.addEventListener('click', onClick);
+        else b.disabled = true;
+        return b;
+      }
+
+      // Janela de páginas: 1 … 4 5 6 … 11
+      function pageWindow(cur, total){
+        var out = [], i;
+        if(total <= 7){ for(i=1;i<=total;i++) out.push(i); return out; }
+        out.push(1);
+        var lo = Math.max(2, cur-1), hi = Math.min(total-1, cur+1);
+        // Perto das pontas, desloca a janela para manter sempre 3 números no meio
+        if(cur <= 3){ lo = 2; hi = 4; }
+        else if(cur >= total-2){ lo = total-3; hi = total-1; }
+        if(lo > 2) out.push('…');
+        for(i=lo;i<=hi;i++) out.push(i);
+        if(hi < total-1) out.push('…');
+        out.push(total);
+        return out;
+      }
+
+      function render(){
+        // Desliga o observer enquanto mexemos no DOM: disconnect() também
+        // descarta os registros pendentes, então não há loop de re-render.
+        if(mo) mo.disconnect();
+
+        var list = host.querySelector('.soro-blog-list');
+        var old  = host.querySelector('.exato-pager');
+        if(old) old.remove();
+
+        if(list){
+          var cards = [].slice.call(list.children).filter(function(c){
+            return c.classList && c.classList.contains('soro-blog-card');
+          });
+          var total = cards.length;
+          var pages = Math.ceil(total / PER_PAGE) || 1;
+          if(page > pages) page = pages;
+          if(page < 1) page = 1;
+
+          // Mudança de atributo (style) não dispara o observer de childList.
+          // Precisa de setProperty(...,'important'): o override do site declara
+          // .soro-blog-card{display:flex!important}, que venceria um style inline comum.
+          var start = (page-1) * PER_PAGE;
+          cards.forEach(function(c, i){
+            if(i >= start && i < start + PER_PAGE) c.style.removeProperty('display');
+            else c.style.setProperty('display', 'none', 'important');
+          });
+
+          if(pages > 1){
+            var nav = document.createElement('nav');
+            nav.className = 'exato-pager';
+            nav.setAttribute('aria-label', 'Paginação dos artigos');
+
+            nav.appendChild(mkBtn('‹', 'Página anterior',
+              page > 1 ? function(){ go(page-1); } : null));
+
+            pageWindow(page, pages).forEach(function(p){
+              if(p === '…'){
+                var s = document.createElement('span');
+                s.className = 'exato-pager-gap';
+                s.setAttribute('aria-hidden', 'true');
+                s.textContent = '…';
+                nav.appendChild(s);
+                return;
+              }
+              var cur = (p === page);
+              var b = mkBtn(String(p),
+                cur ? ('Página ' + p + ', página atual') : ('Ir para a página ' + p),
+                cur ? function(){} : function(){ go(p); });
+              if(cur){ b.classList.add('is-current'); b.setAttribute('aria-current','page'); }
+              nav.appendChild(b);
+            });
+
+            nav.appendChild(mkBtn('›', 'Próxima página',
+              page < pages ? function(){ go(page+1); } : null));
+
+            var st = document.createElement('p');
+            st.className = 'exato-pager-status';
+            st.setAttribute('role', 'status');
+            st.setAttribute('aria-live', 'polite');
+            st.textContent = 'Página ' + page + ' de ' + pages + ' — ' + total + ' artigos';
+            nav.appendChild(st);
+
+            list.parentNode.insertBefore(nav, list.nextSibling);
+          }
+        }
+
+        mo.observe(host, { childList:true, subtree:true });
+      }
+
+      function go(p){
+        page = p;
+        render();
+        var sec = document.getElementById('articles');
+        if(sec){
+          var top = sec.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }
+
+      mo = new MutationObserver(function(){ render(); });
+      render();
     })();
     </script>
   </div>
