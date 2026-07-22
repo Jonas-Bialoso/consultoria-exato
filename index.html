@@ -307,67 +307,26 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);padding:40px 0 28px}
   border-top:1px solid var(--border)!important;
 }
 
-/* ── SORO BLOG — PAGINAÇÃO (6 artigos por página) ── */
-.exato-pager{
+/* ── SORO BLOG — BOTÃO "VER MAIS" (carrega +6 artigos) ── */
+.exato-more{
   display:flex;
-  justify-content:center;
+  flex-direction:column;
   align-items:center;
-  flex-wrap:wrap;
-  gap:8px;
+  gap:12px;
   margin-top:40px;
 }
-.exato-pager-btn{
-  min-width:40px;
-  height:40px;
-  padding:0 12px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--white);
-  color:var(--text);
-  font-family:inherit;
-  font-size:.9rem;
-  font-weight:500;
-  line-height:1;
-  cursor:pointer;
-  transition:background .2s,border-color .2s,color .2s;
-}
-.exato-pager-btn:hover:not(:disabled):not(.is-current){
-  background:var(--green-xlight);
-  border-color:var(--green-mid);
-  color:var(--green);
-}
-.exato-pager-btn:focus-visible{
+.exato-more-btn:focus-visible{
   outline:2px solid var(--green);
-  outline-offset:2px;
+  outline-offset:3px;
 }
-.exato-pager-btn.is-current{
-  background:var(--green);
-  border-color:var(--green);
-  color:var(--white);
-  cursor:default;
-}
-.exato-pager-btn:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
-.exato-pager-gap{
-  padding:0 4px;
-  color:var(--muted);
-  user-select:none;
-}
-.exato-pager-status{
-  width:100%;
-  text-align:center;
+.exato-more-status{
   font-size:.8rem;
   color:var(--muted);
-  margin-top:4px;
+  margin:0;
 }
-@media(max-width:600px){
-  .exato-pager-btn{min-width:36px;height:36px;padding:0 9px;font-size:.85rem}
-}
+/* Alvo do foco após carregar mais: não deve desenhar contorno visível,
+   serve só para levar leitor de tela/teclado aos artigos novos. */
+.exato-more-anchor:focus{outline:none}
 </style>
 
 <!-- JSON-LD Schema -->
@@ -588,53 +547,28 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);padding:40px 0 28px}
     })();
     </script>
 
-    <!-- Paginação dos artigos: 6 por página.
+    <!-- "Ver mais" nos artigos: começa com 6 e carrega +6 a cada clique.
          O embed do Soro renderiza TODOS os artigos de uma vez dentro de
-         .soro-blog-list. Aqui escondemos tudo menos a fatia da página atual
-         e montamos os controles. Na visualização de post único (?post=slug)
-         a lista não existe — nesse caso a paginação some sozinha. -->
+         .soro-blog-list; aqui apenas escondemos o excedente e vamos
+         revelando. Na visualização de post único (?post=slug) a lista
+         não existe — nesse caso o botão some sozinho. -->
     <script>
     (function(){
-      var PER_PAGE = 6;
-      var page = 1;
+      var STEP = 6;          // quantos artigos aparecem por vez
+      var shown = STEP;      // quantos estão visíveis agora
       var mo = null;
       var host = document.getElementById('soro-blog');
       if(!host) return;
 
-      function mkBtn(label, aria, onClick){
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'exato-pager-btn';
-        b.textContent = label;
-        b.setAttribute('aria-label', aria);
-        if(onClick) b.addEventListener('click', onClick);
-        else b.disabled = true;
-        return b;
-      }
-
-      // Janela de páginas: 1 … 4 5 6 … 11
-      function pageWindow(cur, total){
-        var out = [], i;
-        if(total <= 7){ for(i=1;i<=total;i++) out.push(i); return out; }
-        out.push(1);
-        var lo = Math.max(2, cur-1), hi = Math.min(total-1, cur+1);
-        // Perto das pontas, desloca a janela para manter sempre 3 números no meio
-        if(cur <= 3){ lo = 2; hi = 4; }
-        else if(cur >= total-2){ lo = total-3; hi = total-1; }
-        if(lo > 2) out.push('…');
-        for(i=lo;i<=hi;i++) out.push(i);
-        if(hi < total-1) out.push('…');
-        out.push(total);
-        return out;
-      }
-
-      function render(){
+      // firstNewIndex: índice do primeiro card recém-revelado, para levar o
+      // foco até ele. null no render inicial e nos re-renders do embed.
+      function render(firstNewIndex){
         // Desliga o observer enquanto mexemos no DOM: disconnect() também
         // descarta os registros pendentes, então não há loop de re-render.
         if(mo) mo.disconnect();
 
         var list = host.querySelector('.soro-blog-list');
-        var old  = host.querySelector('.exato-pager');
+        var old  = host.querySelector('.exato-more');
         if(old) old.remove();
 
         if(list){
@@ -642,73 +576,61 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);padding:40px 0 28px}
             return c.classList && c.classList.contains('soro-blog-card');
           });
           var total = cards.length;
-          var pages = Math.ceil(total / PER_PAGE) || 1;
-          if(page > pages) page = pages;
-          if(page < 1) page = 1;
+          if(shown > total) shown = total;
 
           // Mudança de atributo (style) não dispara o observer de childList.
           // Precisa de setProperty(...,'important'): o override do site declara
           // .soro-blog-card{display:flex!important}, que venceria um style inline comum.
-          var start = (page-1) * PER_PAGE;
           cards.forEach(function(c, i){
-            if(i >= start && i < start + PER_PAGE) c.style.removeProperty('display');
+            if(i < shown) c.style.removeProperty('display');
             else c.style.setProperty('display', 'none', 'important');
           });
 
-          if(pages > 1){
-            var nav = document.createElement('nav');
-            nav.className = 'exato-pager';
-            nav.setAttribute('aria-label', 'Paginação dos artigos');
+          if(total > STEP){
+            var wrap = document.createElement('div');
+            wrap.className = 'exato-more';
 
-            nav.appendChild(mkBtn('‹', 'Página anterior',
-              page > 1 ? function(){ go(page-1); } : null));
-
-            pageWindow(page, pages).forEach(function(p){
-              if(p === '…'){
-                var s = document.createElement('span');
-                s.className = 'exato-pager-gap';
-                s.setAttribute('aria-hidden', 'true');
-                s.textContent = '…';
-                nav.appendChild(s);
-                return;
-              }
-              var cur = (p === page);
-              var b = mkBtn(String(p),
-                cur ? ('Página ' + p + ', página atual') : ('Ir para a página ' + p),
-                cur ? function(){} : function(){ go(p); });
-              if(cur){ b.classList.add('is-current'); b.setAttribute('aria-current','page'); }
-              nav.appendChild(b);
-            });
-
-            nav.appendChild(mkBtn('›', 'Próxima página',
-              page < pages ? function(){ go(page+1); } : null));
+            var restante = total - shown;
+            if(restante > 0){
+              var btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'btn btn-green exato-more-btn';
+              btn.textContent = 'Ver mais artigos';
+              btn.setAttribute('aria-label',
+                'Ver mais artigos (' + Math.min(STEP, restante) + ' de ' + restante + ' restantes)');
+              btn.addEventListener('click', function(){
+                var primeiroNovo = shown;   // índice do próximo card a aparecer
+                shown += STEP;
+                render(primeiroNovo);
+              });
+              wrap.appendChild(btn);
+            }
 
             var st = document.createElement('p');
-            st.className = 'exato-pager-status';
+            st.className = 'exato-more-status';
             st.setAttribute('role', 'status');
             st.setAttribute('aria-live', 'polite');
-            st.textContent = 'Página ' + page + ' de ' + pages + ' — ' + total + ' artigos';
-            nav.appendChild(st);
+            st.textContent = 'Mostrando ' + shown + ' de ' + total + ' artigos';
+            wrap.appendChild(st);
 
-            list.parentNode.insertBefore(nav, list.nextSibling);
+            list.parentNode.insertBefore(wrap, list.nextSibling);
+          }
+
+          // Acessibilidade: após "ver mais", leva o foco ao primeiro artigo novo,
+          // senão o foco ficaria preso num botão que pode ter sumido da página.
+          // Os cards são <a href>, já focáveis — não usar tabindex="-1" aqui,
+          // isso os tiraria da ordem de tabulação.
+          if(firstNewIndex !== null && cards[firstNewIndex]){
+            cards[firstNewIndex].classList.add('exato-more-anchor');
+            cards[firstNewIndex].focus({ preventScroll:true });
           }
         }
 
         mo.observe(host, { childList:true, subtree:true });
       }
 
-      function go(p){
-        page = p;
-        render();
-        var sec = document.getElementById('articles');
-        if(sec){
-          var top = sec.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top: top, behavior: 'smooth' });
-        }
-      }
-
-      mo = new MutationObserver(function(){ render(); });
-      render();
+      mo = new MutationObserver(function(){ render(null); });
+      render(null);
     })();
     </script>
   </div>
