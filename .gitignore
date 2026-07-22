@@ -1,0 +1,10 @@
+# Credenciais — nunca versionar
+config.php
+mail-config.php
+*.env
+.env
+
+# Lixo de sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,171 @@
+# robots.txt - Consultoria Exato
+# Otimizado para indexação por Google, Facebook, IAs e outros mecanismos de busca
+# Data: 2026-04-14
+# Versão: 3.0 - Removidas Request-rate e regras WordPress
+
+# ==================================================================
+# BOTS ESPECÍFICOS COM PERMISSÕES LIBERAIS
+# ==================================================================
+
+# Google - acesso completo (otimizado para indexação rápida)
+User-agent: Googlebot
+Allow: /
+
+# Bing - acesso completo
+User-agent: Bingbot
+Allow: /
+
+# Facebook - acesso completo (CRÍTICO para compartilhamentos)
+User-agent: facebookexternalhit
+Allow: /
+
+# IAs - acesso completo
+User-agent: CCBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Perplexity
+Allow: /
+
+User-agent: Perplexity-Bot
+Allow: /
+
+User-agent: Anthropic-Crawler
+Allow: /
+
+# ==================================================================
+# BOTS MALICIOSOS - BLOQUEADOS
+# ==================================================================
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MojeekBot
+Disallow: /
+
+# ==================================================================
+# REGRA PADRÃO PARA TODOS OS OUTROS BOTS
+# ==================================================================
+
+User-agent: *
+Allow: /
+
+# ==================================================================
+# BLOQUEIOS ESPECÍFICOS - ÁREAS ADMINISTRATIVAS E CACHE
+# ==================================================================
+
+# Blocos administrativos gerais
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /temp-files/
+
+# Cache - bloqueio seletivo (permite conteúdo, bloqueia índices)
+Disallow: /cache/*.json
+Disallow: /cache/*.tmp
+
+# ==================================================================
+# BLOQUEIOS PARA EVITAR CONTEÚDO DUPLICADO
+# ==================================================================
+
+# Parâmetros de rastreamento (UTM)
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
+Disallow: /*?utm_content=
+Disallow: /*?utm_term=
+
+# Parâmetros de redes sociais
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+Disallow: /*?msclkid=
+
+# Parâmetros de sessão e tracking
+Disallow: /*?sid=
+Disallow: /*?sessionid=
+Disallow: /*?ref=
+
+# ==================================================================
+# PERMITIR RECURSOS IMPORTANTES
+# ==================================================================
+
+# Permitir PDFs, documentos e arquivos de download
+Allow: *.pdf
+Allow: *.xlsx
+Allow: *.doc*
+Allow: *.ppt*
+
+# Permitir imagens (importante para indexação de imagens)
+Allow: /img/
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.webp
+Allow: *.gif
+
+# Permitir CSS e JavaScript (importante para análise de conteúdo)
+Allow: *.css
+Allow: *.js
+
+# ==================================================================
+# SITEMAPS - DECLARAÇÃO COMPLETA
+# ==================================================================
+
+Sitemap: https://consultoriaexato.com.br/sitemap_index.xml
+Sitemap: https://consultoriaexato.com.br/sitemap.xml
+Sitemap: https://consultoriaexato.com.br/sitemap_images.xml
+
+# ==================================================================
+# NOTAS IMPORTANTES SOBRE ESTA VERSÃO
+# ==================================================================
+
+# MELHORIAS IMPLEMENTADAS (Fase 5 - Item 25):
+# ✓ Request-rate removido de TODOS os User-agent
+#   └─ Razão: Diretiva inválida no protocolo robots.txt
+#
+# ✓ Regras WordPress completamente removidas
+#   └─ Site não utiliza WordPress
+#   └─ Removidos: /wp-admin/, /wp-login.php, /wp-config.php, /wp-json/
+#
+# ✓ Mantidas as bloqueios úteis
+#   └─ Áreas administrativas gerais (/admin/, /private/)
+#   └─ Prevenção de conteúdo duplicado (parâmetros UTM, fbclid, etc)
+#   └─ Bloqueios de bots maliciosos
+#
+# ✓ Mantidas as permissões essenciais
+#   └─ Imagens (importante para Google Images)
+#   └─ PDF e documentos
+#   └─ CSS e JavaScript
+#
+# RESULTADO ESPERADO:
+# - Remoção de erros de validação no Google Search Console
+# - Melhor conformidade com protocolo robots.txt
+# - Sem impacto negativo na indexação
+#
+# PRÓXIMOS PASSOS:
+# 1. Fazer upload deste arquivo via FTP
+# 2. Testar em Google Search Console → Ferramentas → Testador de robots.txt
+# 3. Verificar que Googlebot tem acesso permitido a /
+# 4. Verificar que Googlebot tem acesso a /faq/index.html
+# 5. Confirmar que /admin/ está bloqueado
+
+# Bloquear URLs de busca interna do FAQ
+User-agent: *
+Disallow: /faq/?q=
+Disallow: /faq/index.html?q=
+Disallow: /en/faq/?q=
+

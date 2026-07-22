@@ -1,0 +1,60 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://consultoriaexato.com.br/",
+      "service-desc": [
+        {
+          "href": "https://consultoriaexato.com.br/docs/api",
+          "type": "text/html"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://consultoriaexato.com.br/docs/api",
+          "type": "text/html"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://consultoriaexato.com.br/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://consultoriaexato.com.br/faq/",
+      "service-doc": [
+        {
+          "href": "https://consultoriaexato.com.br/faq/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://consultoriaexato.com.br/faq/",
+          "type": "text/markdown"
+        }
+      ]
+    },
+    {
+      "anchor": "https://consultoriaexato.com.br/en/",
+      "service-doc": [
+        {
+          "href": "https://consultoriaexato.com.br/docs/api",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "https://consultoriaexato.com.br/en/faq/",
+      "service-doc": [
+        {
+          "href": "https://consultoriaexato.com.br/en/faq/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://consultoriaexato.com.br/en/faq/",
+          "type": "text/markdown"
+        }
+      ]
+    }
+  ]
+}

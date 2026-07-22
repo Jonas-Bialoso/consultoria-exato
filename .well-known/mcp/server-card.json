@@ -1,0 +1,31 @@
+{
+  "serverInfo": {
+    "name": "Consultoria Exato",
+    "version": "1.0.0",
+    "description": "Portal informativo de consultoria em EHS — Segurança do Trabalho, Meio Ambiente e Radioproteção Industrial. Ribeirão Preto, SP, Brasil."
+  },
+  "transport": {
+    "type": "http",
+    "endpoint": "https://consultoriaexato.com.br"
+  },
+  "capabilities": {
+    "resources": [
+      "homepage_pt",
+      "homepage_en",
+      "faq_pt",
+      "faq_en",
+      "service_catalog",
+      "contact_info"
+    ],
+    "contentNegotiation": {
+      "markdown": true,
+      "formats": ["text/html", "text/markdown"]
+    }
+  },
+  "contact": {
+    "name": "Paulo Cassim",
+    "email": "contato@consultoriaexato.com.br",
+    "whatsapp": "+5516997888750"
+  },
+  "language": ["pt-BR", "en-US"]
+}

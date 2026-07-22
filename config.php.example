@@ -1,0 +1,15 @@
+<?php
+// =====================================================================
+//  MODELO de configuração do formulário de contato.
+//
+//  Como usar:
+//    1. Copiar este arquivo para "config.php" na RAIZ do site.
+//    2. Preencher com os valores reais.
+//    3. NUNCA versionar o config.php (já está no .gitignore).
+//
+//  Usado por disparo.php e en/disparo.php.
+// =====================================================================
+
+define('GUSER', 'contato@exemplo.com.br');   // usuário SMTP
+define('GPWD',  'COLOQUE_A_SENHA_AQUI');     // senha SMTP
+define('GDEST', 'destino@exemplo.com.br');   // quem recebe as mensagens

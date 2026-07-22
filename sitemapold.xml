@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<!--
+  ============================================================
+  CONSULTORIA EXATO — sitemap.xml
+  Gerado em: 2026-03-29
+  Domínio: https://consultoriaexato.com.br
+  Padrão: Sitemaps Protocol 0.9 (sitemaps.org)
+  Inclui: hreflang PT-BR / EN | priority | changefreq
+  ============================================================
+-->
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+    http://www.google.com/schemas/sitemap-image/1.1
+    http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+  <!-- ======================================================
+       PÁGINA PRINCIPAL — Português (PT-BR)
+       Conteúdo: Sobre, Serviços, Portfólio, Depoimentos,
+                 Contato, FAQ (103 perguntas)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://consultoriaexato.com.br/"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://consultoriaexato.com.br/img/profile.jpg</image:loc>
+      <image:title>Paulo Cassim — Fundador da Consultoria Exato</image:title>
+      <image:caption>Paulo Cassim, especialista em Segurança do Trabalho, Meio Ambiente Industrial e Radioproteção com 28 anos de experiência</image:caption>
+    </image:image>
+  </url>
+
+  <!-- index.html canônico -->
+  <url>
+    <loc>https://consultoriaexato.com.br/index.html</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/index.html"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://consultoriaexato.com.br/index.html"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ======================================================
+       SEÇÃO: SOBRE A EXATO (#about)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/#about</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#about"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#about"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ======================================================
+       SEÇÃO: PRINCIPAIS SERVIÇOS (#services)
+       Segurança do Trabalho | Meio Ambiente | Radioproteção
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/#services</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#services"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#services"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ======================================================
+       SEÇÃO: PORTFÓLIO (#portfolio)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/#portfolio</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#portfolio"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#portfolio"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ======================================================
+       SEÇÃO: DEPOIMENTOS (#resume)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/#resume</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#resume"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#resume"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ======================================================
+       SEÇÃO: CONTATO (#contact)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/#contact</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#contact"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#contact"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ======================================================
+       SEÇÃO: FAQ — PERGUNTAS FREQUENTES (#faq)
+       103 perguntas sobre EHS, ESG, Radioproteção
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/#faq</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#faq"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ======================================================
+       VERSÃO EM INGLÊS — Main Page (EN)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/en/index.html</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/index.html"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://consultoriaexato.com.br/index.html"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- EN: About -->
+  <url>
+    <loc>https://consultoriaexato.com.br/en/index.html#about</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#about"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#about"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- EN: Services -->
+  <url>
+    <loc>https://consultoriaexato.com.br/en/index.html#services</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#services"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#services"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- EN: Portfolio -->
+  <url>
+    <loc>https://consultoriaexato.com.br/en/index.html#portfolio</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#portfolio"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#portfolio"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- EN: Testimonials -->
+  <url>
+    <loc>https://consultoriaexato.com.br/en/index.html#resume</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#resume"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#resume"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- EN: Contact -->
+  <url>
+    <loc>https://consultoriaexato.com.br/en/index.html#contact</loc>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://consultoriaexato.com.br/en/index.html#contact"/>
+    <xhtml:link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://consultoriaexato.com.br/#contact"/>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ======================================================
+       CURRÍCULO / CV (PDF)
+       ====================================================== -->
+  <url>
+    <loc>https://consultoriaexato.com.br/img/profile.pdf</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

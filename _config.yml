@@ -1,7 +1,0 @@
-title: Consultoria Exato — correção dos links 404
-description: Diagnóstico e correção do redirect de posts da raiz para /blog/
-theme: jekyll-theme-cayman
-lang: pt-BR
-
-exclude:
-  - README.md

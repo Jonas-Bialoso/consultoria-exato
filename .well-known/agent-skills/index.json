@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "get-service-info",
+      "type": "skill-md",
+      "description": "Retrieve detailed information about EHS consulting services offered by Consultoria Exato — occupational safety, environmental management, and industrial radiation protection.",
+      "url": "https://consultoriaexato.com.br/.well-known/agent-skills/get-service-info/SKILL.md",
+      "digest": "sha256:8ef2f00b542cea77298ca0573e05b70cece9e49ccc3243d5b7301c3c17444cad"
+    },
+    {
+      "name": "get-contact-info",
+      "type": "skill-md",
+      "description": "Retrieve contact information and instructions for requesting a quote or consulting engagement from Consultoria Exato.",
+      "url": "https://consultoriaexato.com.br/.well-known/agent-skills/get-contact-info/SKILL.md",
+      "digest": "sha256:309b737ab648280fe30f190eca639d59d33cf6caa60f892cb907603021540131"
+    },
+    {
+      "name": "get-faq-content",
+      "type": "skill-md",
+      "description": "Access the Consultoria Exato FAQ with 103 expert questions and answers on occupational safety, environmental management, and radiation protection in Brazil.",
+      "url": "https://consultoriaexato.com.br/.well-known/agent-skills/get-faq-content/SKILL.md",
+      "digest": "sha256:81e863067368b942208e9af3a74977582a7aa9ef762122a333f87efa8270d321"
+    }
+  ]
+}

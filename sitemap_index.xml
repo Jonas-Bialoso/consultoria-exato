@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  CONSULTORIA EXATO — sitemap_index.xml
+  Gerado em: 2026-03-29
+  Domínio: https://consultoriaexato.com.br
+  Padrão: Sitemaps Index Protocol 0.9
+  ============================================================
+  COMO USAR:
+  Adicione no robots.txt:
+    Sitemap: https://consultoriaexato.com.br/sitemap_index.xml
+
+  Ou submeta cada sitemap individualmente no Google Search Console
+  e no Bing Webmaster Tools.
+  ============================================================
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Sitemap principal (páginas e seções) -->
+  <sitemap>
+    <loc>https://consultoriaexato.com.br/sitemap.xml</loc>
+    <lastmod>2026-03-29</lastmod>
+  </sitemap>
+
+  <!-- Sitemap de imagens (Google Images) -->
+  <sitemap>
+    <loc>https://consultoriaexato.com.br/sitemap_images.xml</loc>
+    <lastmod>2026-03-29</lastmod>
+  </sitemap>
+
+</sitemapindex>
