@@ -1,0 +1,34 @@
+# =====================================================================
+#  Consultoria Exato — Redirect de URLs de post da RAIZ para /blog/
+# ---------------------------------------------------------------------
+#  Problema: a plataforma de SEO gera links internos apontando para
+#            https://consultoriaexato.com.br/{slug}  (raiz)
+#            mas o post real vive em
+#            https://consultoriaexato.com.br/blog/{slug}/  (WordPress)
+#            => a URL de raiz cai no 404 da Locaweb.
+#
+#  Solução: este bloco vai no .htaccess da RAIZ do domínio
+#           (pasta public_html / www do site principal, NÃO dentro de /blog).
+#           Ele faz 301 de /{slug} -> /blog/{slug}/
+#
+#  IMPORTANTE: colar logo após "RewriteEngine On", antes das regras do
+#              site principal. Se já existir redirect de HTTPS/www, deixar
+#              este bloco DEPOIS deles.
+# =====================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) Nunca mexer em arquivos ou pastas que existem de verdade na raiz
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # 2) Não redirecionar o que já é /blog nem áreas técnicas do WordPress
+  RewriteCond %{REQUEST_URI} !^/blog(/|$)      [NC]
+  RewriteCond %{REQUEST_URI} !^/wp-            [NC]
+
+  # 3) Só caminhos de 1 segmento e SEM ponto (slug de post).
+  #    O "[^/.]+" já exclui .css .js .png .xml etc.
+  #    Ex.: /o-que-e-pgrs...  ->  /blog/o-que-e-pgrs.../  (301)
+  RewriteRule ^([^/.]+)/?$ /blog/$1/ [R=301,L]
+</IfModule>
